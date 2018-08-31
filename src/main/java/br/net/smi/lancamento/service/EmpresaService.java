@@ -2,6 +2,7 @@ package br.net.smi.lancamento.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,8 @@ public class EmpresaService{
 		return empresaRepository.save(empresa);
 	}
 	
-	public Empresa filtrarPorCnpj(String cnpj) {
-		return empresaRepository.findByCnpj(cnpj).get();
+	public Optional<Empresa> filtrarPorCnpjENome(String cnpj, String nome) {
+		return empresaRepository.findByCnpjAndNome(cnpj, nome);
 	}
 
 

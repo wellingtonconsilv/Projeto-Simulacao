@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.net.smi.lancamento.model.Empresa;
@@ -32,9 +33,9 @@ public class EmpresaResource {
 				
 	}
 	
-	@GetMapping("/empresa/{cnpj}")
-	public ResponseEntity<Empresa> filtrarPorCnpj(@PathVariable String cnpj){		
-		return new ResponseEntity<>(empresaService.filtrarPorCnpj(cnpj), HttpStatus.OK);
+	@GetMapping("/empresa/buscarPorNomeCnpj")
+	public ResponseEntity<?> filtrarPorCnpjENome(@RequestParam("cnpj") String cnpj, @RequestParam("nome") String nome){		
+		return new ResponseEntity<>(empresaService.filtrarPorCnpjENome(cnpj, nome), HttpStatus.OK);
 				
 	}
 	

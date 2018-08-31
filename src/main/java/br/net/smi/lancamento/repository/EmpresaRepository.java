@@ -9,5 +9,5 @@ import br.net.smi.lancamento.model.Empresa;
 
 
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
-	Optional<Empresa> findByCnpj(String cnpj);
+	Optional<Empresa> findByCnpjAndNome(String cnpj, String nome);
 }

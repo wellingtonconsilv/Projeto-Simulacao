@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,8 +26,12 @@ public class Empresa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotNull
+	@NotBlank
 	private String nome;
 	@Column(length = 14)
+	@NotNull
+	@NotBlank
 	private String cnpj;
 	private String nomeResponsavel;
 	private String contato;

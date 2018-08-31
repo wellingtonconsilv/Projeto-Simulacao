@@ -2,6 +2,7 @@ package br.net.smi.lancamento.resource;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +17,7 @@ import br.net.smi.lancamento.service.CategoriaService;
 
 @RestController
 public class CategoriaResource {
+	@Autowired
 	private CategoriaService categoriaService;
 	
 	@PostMapping("/categoria")
