@@ -21,13 +21,13 @@ public class EmpresaService{
 		return empresaRepository.save(empresa);
 	}
 	
-	public Optional<Empresa> filtrarPorCnpjENome(String cnpj, String nome) {
+	public Optional<Empresa> listarPorCnpjENome(String cnpj, String nome) {
 		return empresaRepository.findByCnpjAndNome(cnpj, nome);
 	}
 
 
 	
-	public List<Empresa> filtrarTodasEmpresas() {
+	public List<Empresa> listarTodasEmpresas() {
 		return empresaRepository.findAll();
 	}
 	
@@ -37,6 +37,10 @@ public class EmpresaService{
 	
 	public Empresa atualizar(Empresa empresa) {
 		return empresaRepository.save(empresa);
+	}
+	
+	public Empresa listarPorId(Long id) {
+		return empresaRepository.findById(id).get();
 	}
 	
 

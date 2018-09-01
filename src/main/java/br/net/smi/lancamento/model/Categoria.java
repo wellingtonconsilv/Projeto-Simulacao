@@ -13,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor
 public class Categoria implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -24,6 +26,6 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	String descricao;
-	@OneToMany(mappedBy = "categoria", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "categoria", orphanRemoval = true, cascade = CascadeType.ALL)
 	List<Lancamento> lancamentos = new ArrayList<Lancamento>();
 }

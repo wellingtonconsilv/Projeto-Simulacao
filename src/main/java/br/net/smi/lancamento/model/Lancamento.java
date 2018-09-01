@@ -14,10 +14,12 @@ import javax.persistence.ManyToOne;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
 @Entity
+@NoArgsConstructor
 public class Lancamento implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

@@ -26,6 +26,10 @@ public class LancamentoService {
 		return lancamentoRepository.save(lancamento);
 	}
 	
+	public Lancamento listarPorId(Long id) {
+		return lancamentoRepository.findById(id).get();
+	}
+	
 	public void remover(Long id) {
 		lancamentoRepository.deleteById(id);
 	}

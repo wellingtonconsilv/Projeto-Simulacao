@@ -29,13 +29,13 @@ public class EmpresaResource {
 	
 	@GetMapping("/empresa")
 	public ResponseEntity<List<Empresa>> filtrarTodasEmpresas(){		
-		return new ResponseEntity<>(empresaService.filtrarTodasEmpresas(), HttpStatus.OK);
+		return new ResponseEntity<>(empresaService.listarTodasEmpresas(), HttpStatus.OK);
 				
 	}
 	
 	@GetMapping("/empresa/buscarPorNomeCnpj")
 	public ResponseEntity<?> filtrarPorCnpjENome(@RequestParam("cnpj") String cnpj, @RequestParam("nome") String nome){		
-		return new ResponseEntity<>(empresaService.filtrarPorCnpjENome(cnpj, nome), HttpStatus.OK);
+		return new ResponseEntity<>(empresaService.listarPorCnpjENome(cnpj, nome), HttpStatus.OK);
 				
 	}
 	
