@@ -17,38 +17,41 @@ import org.springframework.web.bind.annotation.RestController;
 import br.net.smi.lancamento.model.Empresa;
 import br.net.smi.lancamento.service.EmpresaService;
 
+
 @RestController
 public class EmpresaResource {
 	@Autowired
 	private EmpresaService empresaService;
-	
-	@PostMapping("/empresa")
-	public ResponseEntity<Empresa> cadastrar(@RequestBody Empresa empresa){
+
+	@PostMapping("/Novaempresa")
+	public ResponseEntity<Empresa> cadastrar(@RequestBody Empresa empresa) {
 		return new ResponseEntity<>(empresaService.cadastrar(empresa), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/empresa")
-	public ResponseEntity<List<Empresa>> filtrarTodasEmpresas(){		
+	public ResponseEntity<List<Empresa>> listarTodasCategorias() {
 		return new ResponseEntity<>(empresaService.listarTodasEmpresas(), HttpStatus.OK);
-				
 	}
-	
+
 	@GetMapping("/empresa/buscarPorNomeCnpj")
-	public ResponseEntity<?> filtrarPorCnpjENome(@RequestParam("cnpj") String cnpj, @RequestParam("nome") String nome){		
+	public ResponseEntity<?> filtrarPorCnpjENome(@RequestParam("cnpj") String cnpj, @RequestParam("nome") String nome) {
 		return new ResponseEntity<>(empresaService.listarPorCnpjENome(cnpj, nome), HttpStatus.OK);
-				
+
 	}
 	
+	@GetMapping("/empresa/{id}")
+	public ResponseEntity<Empresa> listarPorId(@PathVariable Long id) {
+		return new ResponseEntity<>(empresaService.listarPorId(id),HttpStatus.OK);
+	}
+	@PostMapping("/empresa")
+	public ResponseEntity<Empresa> atualizar(@RequestBody Empresa empresa) {
+		return new ResponseEntity<>(empresaService.atualizar(empresa), HttpStatus.OK);
+	}
+
 	@DeleteMapping("/empresa/{id}")
-	public ResponseEntity<?> remover(@PathVariable Long id){
+	public ResponseEntity<?> remover(@PathVariable Long id) {
 		empresaService.remover(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	@PutMapping
-	public ResponseEntity<Empresa> atualizar(@RequestBody Empresa empresa){
-		return new ResponseEntity<>(empresaService.atualizar(empresa), HttpStatus.OK);
-	}
-		
-	
+
 }

@@ -19,30 +19,30 @@ import br.net.smi.lancamento.service.CategoriaService;
 public class CategoriaResource {
 	@Autowired
 	private CategoriaService categoriaService;
-	
-	@PostMapping("/categoria")
-	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria){
+
+	@PostMapping("/Novacategoria")
+	public ResponseEntity<Categoria> cadastrar(@RequestBody Categoria categoria) {
 		return new ResponseEntity<>(categoriaService.cadastrar(categoria), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/categoria")
-	public ResponseEntity<List<Categoria>> listarTodasCategorias(){
+	public ResponseEntity<List<Categoria>> listarTodasCategorias() {
 		return new ResponseEntity<>(categoriaService.listarTodasCategorias(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/categoria/{id}")
-	public ResponseEntity<Categoria> listarPorId(@PathVariable Long id){
+	public ResponseEntity<Categoria> listarPorId(@PathVariable Long id) {
 		return new ResponseEntity<>(categoriaService.listarPorId(id), HttpStatus.OK);
 	}
-	
-	@PostMapping
-	public ResponseEntity<Categoria> atualizar(@RequestBody Categoria categoria){
-		return new ResponseEntity<>(categoriaService.atualizar(categoria), HttpStatus.OK);		
+
+	@PostMapping("/categoria")
+	public ResponseEntity<Categoria> atualizar(@RequestBody Categoria categoria) {
+		return new ResponseEntity<>(categoriaService.atualizar(categoria), HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/categoria/{id}")
-	public ResponseEntity<?> remover(@PathVariable Long id){
+	public ResponseEntity<?> remover(@PathVariable Long id) {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
- }
+
+}

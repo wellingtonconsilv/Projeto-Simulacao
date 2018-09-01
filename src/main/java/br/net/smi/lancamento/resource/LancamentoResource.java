@@ -35,7 +35,7 @@ public class LancamentoResource {
 	private Lancamento lancamento;
 	private Empresa empresa;
 	
-	@GetMapping
+	@GetMapping("/lancamento")
 	public ResponseEntity<List<Lancamento>> listar(){
 		return new ResponseEntity<>(lancamentoService.listar(), HttpStatus.OK);
 	}
@@ -55,7 +55,7 @@ public class LancamentoResource {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@RequestMapping("/lancamento/incluirEmCategoria")
+	@PostMapping("/lancamento/incluirEmCategoria")
 	public ResponseEntity<Lancamento> incluirEmCategoria(@RequestParam Long lancamentoId, @RequestParam Long categoriaId){
 		categoria = categoriaService.listarPorId(categoriaId);
 		lancamento = lancamentoService.listarPorId(lancamentoId);
@@ -65,7 +65,7 @@ public class LancamentoResource {
 		
 	}
 	
-	@RequestMapping("/lancamento/incluirEmEmpresa")
+	@PostMapping("/lancamento/incluirEmEmpresa")
 	public ResponseEntity<Lancamento> incluirEmEmpresa(@RequestParam Long lancamentoId, @RequestParam Long empresaId){
 		empresa = empresaService.listarPorId(empresaId);
 		lancamento = lancamentoService.listarPorId(lancamentoId);

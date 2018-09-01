@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.net.smi.lancamento.model.Categoria;
 import br.net.smi.lancamento.model.Empresa;
 import br.net.smi.lancamento.repository.EmpresaRepository;
 
@@ -24,7 +23,6 @@ public class EmpresaService{
 	public Optional<Empresa> listarPorCnpjENome(String cnpj, String nome) {
 		return empresaRepository.findByCnpjAndNome(cnpj, nome);
 	}
-
 
 	
 	public List<Empresa> listarTodasEmpresas() {
