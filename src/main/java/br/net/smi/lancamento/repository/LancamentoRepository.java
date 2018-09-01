@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.net.smi.lancamento.model.Lancamento;
 
 @Repository
-public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>{
 
 }

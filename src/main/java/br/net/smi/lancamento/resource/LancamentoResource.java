@@ -24,24 +24,21 @@ import br.net.smi.lancamento.service.LancamentoService;
 
 @RestController
 public class LancamentoResource {
-	
 	@Autowired
 	private LancamentoService lancamentoService;
-
-	private Lancamento lancamento = new Lancamento();
-	
-	private Categoria categoria = new Categoria();
-	@Autowired
-	private CategoriaService categoriaService;
 	@Autowired
 	private EmpresaService empresaService;
-	private Empresa empresa = new Empresa();
+	@Autowired
+	private CategoriaService categoriaService;
 	
-	@GetMapping("/lancamento")
+	private Categoria categoria;
+	private Lancamento lancamento;
+	private Empresa empresa;
+	
+	@GetMapping
 	public ResponseEntity<List<Lancamento>> listar(){
 		return new ResponseEntity<>(lancamentoService.listar(), HttpStatus.OK);
 	}
-	
 	@PostMapping("/lancamento")
 	public ResponseEntity<Lancamento> cadastrar(@RequestBody Lancamento lancamento){
 		return new ResponseEntity<>(lancamentoService.cadastrar(lancamento), HttpStatus.CREATED);

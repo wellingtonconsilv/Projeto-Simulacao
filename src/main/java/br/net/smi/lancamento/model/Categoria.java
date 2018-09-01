@@ -26,6 +26,6 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
 	String descricao;
-	@OneToMany(mappedBy = "categoria", orphanRemoval = true, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "categoria")
 	List<Lancamento> lancamentos = new ArrayList<Lancamento>();
 }

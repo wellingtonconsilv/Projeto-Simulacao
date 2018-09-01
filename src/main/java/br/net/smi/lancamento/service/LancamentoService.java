@@ -22,15 +22,17 @@ public class LancamentoService {
 		return lancamentoRepository.save(lancamento);
 	}
 	
-	public Lancamento atualizar(Lancamento lancamento){ 
+	public Lancamento atualizar(Lancamento lancamento) {
 		return lancamentoRepository.save(lancamento);
+	}
+	
+	public void remover(Long id) {
+		lancamentoRepository.deleteById(id);
 	}
 	
 	public Lancamento listarPorId(Long id) {
 		return lancamentoRepository.findById(id).get();
 	}
 	
-	public void remover(Long id) {
-		lancamentoRepository.deleteById(id);
-	}
+
 }
