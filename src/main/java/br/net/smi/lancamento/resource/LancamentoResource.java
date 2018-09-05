@@ -1,8 +1,10 @@
 package br.net.smi.lancamento.resource;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,63 +17,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.net.smi.lancamento.model.Categoria;
-import br.net.smi.lancamento.model.Empresa;
 import br.net.smi.lancamento.model.Lancamento;
-import br.net.smi.lancamento.service.CategoriaService;
-import br.net.smi.lancamento.service.EmpresaService;
+import br.net.smi.lancamento.model.LancamentoDTO;
 import br.net.smi.lancamento.service.LancamentoService;
 
 @RestController
+@RequestMapping("/lancamento")
 public class LancamentoResource {
 	@Autowired
 	private LancamentoService lancamentoService;
-	@Autowired
-	private EmpresaService empresaService;
-	@Autowired
-	private CategoriaService categoriaService;
-	
-	private Categoria categoria;
-	private Lancamento lancamento;
-	private Empresa empresa;
-	
-	@GetMapping("/lancamento")
-	public ResponseEntity<List<Lancamento>> listar(){
-		return new ResponseEntity<>(lancamentoService.listar(), HttpStatus.OK);
+
+	@GetMapping
+	public ResponseEntity<List<Lancamento>> listarPorVencimento(
+			@RequestParam("dataInicio") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataInicio,
+			@RequestParam("dataFim") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate dataFim) {
+		return new ResponseEntity<>(lancamentoService.listarPorVencimento(dataInicio, dataFim), HttpStatus.OK);
 	}
-	@PostMapping("/lancamento")
-	public ResponseEntity<Lancamento> cadastrar(@RequestBody Lancamento lancamento){
-		return new ResponseEntity<>(lancamentoService.cadastrar(lancamento), HttpStatus.CREATED);
+
+	@PostMapping
+	public ResponseEntity<Lancamento> cadastrar(@RequestBody LancamentoDTO lancamentoDTO) {
+		return new ResponseEntity<>(lancamentoService.cadastrar(lancamentoDTO), HttpStatus.CREATED);
 	}
-	
-	@PutMapping("/lancamento")
-	public ResponseEntity<Lancamento> atualizar(@RequestBody Lancamento lancamento){
+
+	@PutMapping
+	public ResponseEntity<Lancamento> atualizar(@RequestBody Lancamento lancamento) {
 		return new ResponseEntity<>(lancamentoService.atualizar(lancamento), HttpStatus.OK);
 	}
-	
-	@DeleteMapping("/lancamento/{id}")
-	public ResponseEntity<?> remover(@PathVariable Long id){
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> remover(@PathVariable Long id) {
 		lancamentoService.remover(id);
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	@PostMapping("/lancamento/incluirEmCategoria")
-	public ResponseEntity<Lancamento> incluirEmCategoria(@RequestParam Long lancamentoId, @RequestParam Long categoriaId){
-		categoria = categoriaService.listarPorId(categoriaId);
-		lancamento = lancamentoService.listarPorId(lancamentoId);
-		lancamento.setCategoria(categoria);
-		lancamentoService.atualizar(lancamento);
-		return new ResponseEntity<>(lancamento, HttpStatus.OK);
-		
-	}
-	
-	@PostMapping("/lancamento/incluirEmEmpresa")
-	public ResponseEntity<Lancamento> incluirEmEmpresa(@RequestParam Long lancamentoId, @RequestParam Long empresaId){
-		empresa = empresaService.listarPorId(empresaId);
-		lancamento = lancamentoService.listarPorId(lancamentoId);
-		lancamento.setEmpresa(empresa);
-		lancamentoService.atualizar(lancamento);
-		return new ResponseEntity<>(lancamento, HttpStatus.OK);
-		
 	}
 }

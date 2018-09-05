@@ -1,24 +1,24 @@
 package br.net.smi.lancamento.model;
 
-import javax.persistence.Entity;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-@NoArgsConstructor
-public class Categoria {
-
+public class LancamentoDTO {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Long id;
-	@NotEmpty
-	String descricao;
+	private Long id;
+	private Long empresaId;
+	private Long categoriaId;
+	private String tipo;
+	private LocalDate vencimento;
+	private BigDecimal valor;
 }
